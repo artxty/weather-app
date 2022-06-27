@@ -4,6 +4,8 @@ import PropTypes from "prop-types";
 import GoogleMap from "./components/GoogleMap";
 import Marker from "./components/Marker";
 
+import settings from "../../settings";
+
 function Map({ position, zoom, onPositionChange, className }) {
   const handleMarkerDragEnd = (e) => {
     onPositionChange({ lat: e.latLng.lat(), lng: e.latLng.lng() });
@@ -11,7 +13,7 @@ function Map({ position, zoom, onPositionChange, className }) {
 
   return (
     <div className={className}>
-      <Wrapper apiKey="">
+      <Wrapper apiKey={settings.keys.googleMapsAPIKey}>
         <GoogleMap center={position} zoom={zoom}>
           <Marker
             draggable

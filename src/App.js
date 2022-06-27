@@ -2,17 +2,10 @@ import { useState } from "react";
 import Map from "./components/Map";
 import Weather from "./components/Weather";
 import useOpenWeatherApi from "./hooks/useOpenWeatherApi";
-
-const MAP_SETTINGS = {
-  zoom: 10,
-  initialLocation: {
-    lat: 40.758701,
-    lng: -111.876183,
-  },
-};
+import settings from "./settings";
 
 function App() {
-  const [position, setPosition] = useState(MAP_SETTINGS.initialLocation);
+  const [position, setPosition] = useState(settings.map.defaultLocation);
   const { isLoading, data } = useOpenWeatherApi(position);
 
   const handlePositionChange = (newPosition) => {
@@ -23,7 +16,7 @@ function App() {
     <div className="h-screen flex flex-row flex-wrap justify-center items-center">
       <Map
         className="h-4/5 border rounded min-w-[350px] max-w-5xl grow m-5"
-        zoom={MAP_SETTINGS.zoom}
+        zoom={settings.map.defaultZoom}
         position={position}
         onPositionChange={handlePositionChange}
       />
