@@ -25,7 +25,7 @@ function GoogleMap(props) {
 
   return (
     <>
-      <div ref={ref} id="map" style={{ width: "100%", height: "100%" }} />
+      <div ref={ref} className="w-full h-full" />
       {Children.map(children, (child) => cloneElement(child, { map }))}
     </>
   );
