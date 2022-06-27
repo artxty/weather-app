@@ -3,6 +3,7 @@ import settings from "../settings";
 
 const useOpenWeatherApi = ({ lat, lng }) => {
   const [data, setData] = useState(null);
+  const [status, setStatus] = useState("Loading");
 
   useEffect(() => {
     fetch(
@@ -10,11 +11,16 @@ const useOpenWeatherApi = ({ lat, lng }) => {
     )
       .then((response) => response.json())
       .then((json) => {
-        setData(json);
+        if (json.cod === 200) {
+          setData(json);
+          setStatus("Success");
+        } else {
+          setStatus(json.message);
+        }
       });
   }, [lat, lng]);
 
-  return { data, isLoading: data === null };
+  return { data, status };
 };
 
 export default useOpenWeatherApi;

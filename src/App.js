@@ -6,7 +6,7 @@ import settings from "./settings";
 
 function App() {
   const [position, setPosition] = useState(settings.map.defaultLocation);
-  const { isLoading, data } = useOpenWeatherApi(position);
+  const { data, status } = useOpenWeatherApi(position);
 
   const handlePositionChange = (newPosition) => {
     setPosition(newPosition);
@@ -21,8 +21,8 @@ function App() {
         onPositionChange={handlePositionChange}
       />
       <div className="h-4/5 border rounded p-10 m-5 flex flex-col justify-center grow max-w-sm">
-        {isLoading ? (
-          "Loading..."
+        {data === null ? (
+          status
         ) : (
           <Weather
             locationName={data.name}
