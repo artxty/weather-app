@@ -14,13 +14,17 @@ function Map({ position, zoom, onPositionChange, className }) {
   return (
     <div className={className}>
       <Wrapper apiKey={settings.keys.googleMapsAPIKey}>
-        <GoogleMap center={position} zoom={zoom}>
-          <Marker
-            draggable
-            onDragEnd={handleMarkerDragEnd}
-            position={position}
-          />
-        </GoogleMap>
+        <GoogleMap
+          center={position}
+          zoom={zoom}
+          marker={
+            <Marker
+              draggable
+              onDragEnd={handleMarkerDragEnd}
+              position={position}
+            />
+          }
+        />
       </Wrapper>
     </div>
   );

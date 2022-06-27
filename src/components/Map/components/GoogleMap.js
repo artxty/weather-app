@@ -1,8 +1,8 @@
-import { useRef, useEffect, Children, cloneElement, useState } from "react";
+import { useRef, useEffect, cloneElement, useState } from "react";
 import PropTypes from "prop-types";
 
 function GoogleMap(props) {
-  const { center, zoom, children } = props;
+  const { center, zoom, marker } = props;
   const ref = useRef();
   const [map, setMap] = useState();
 
@@ -26,7 +26,7 @@ function GoogleMap(props) {
   return (
     <>
       <div ref={ref} className="w-full h-full" />
-      {Children.map(children, (child) => cloneElement(child, { map }))}
+      {cloneElement(marker, { map })}
     </>
   );
 }
@@ -37,10 +37,7 @@ GoogleMap.propTypes = {
     lng: PropTypes.number,
   }).isRequired,
   zoom: PropTypes.number.isRequired,
-  children: PropTypes.oneOfType([
-    PropTypes.arrayOf(PropTypes.node),
-    PropTypes.node,
-  ]).isRequired,
+  marker: PropTypes.node.isRequired,
 };
 
 export default GoogleMap;
